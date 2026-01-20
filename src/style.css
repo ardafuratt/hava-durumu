@@ -47,8 +47,7 @@ body {
 .rainy-theme {
     background: url('/rainy.webp');
     background-size: cover;
-    
-
+    background-position: center;
 }
 
 .thunder-theme {
@@ -89,7 +88,7 @@ body {
 /* Derece Alanı - Libre Bodoni */
 .temp-text {
     font-family: 'Libre Bodoni', serif;
-    font-size: clamp(2.5rem, 10vw, 9rem);
+    font-size: clamp(3.5rem, 12vw, 10rem);
     font-weight: 300;
 }
 
@@ -280,10 +279,12 @@ input[type=range]::-webkit-slider-thumb:active {
     .city-name {
         font-size: clamp(1.8rem, 8vw, 4rem);
         margin-top: 1rem;
+        z-index: 50;
+        position: relative;
     }
 
     .temp-text {
-        font-size: clamp(2rem, 8vw, 5rem);
+        font-size: clamp(3rem, 10vw, 6rem);
     }
 
     .status-text {
@@ -347,10 +348,12 @@ input[type=range]::-webkit-slider-thumb:active {
         font-size: clamp(1.5rem, 7vw, 3rem);
         letter-spacing: 0.05em;
         margin-top: 0.5rem;
+        z-index: 50;
+        position: relative;
     }
 
     .temp-text {
-        font-size: clamp(1.8rem, 7vw, 4rem);
+        font-size: clamp(2.5rem, 9vw, 5rem);
     }
 
     .status-text {
@@ -420,10 +423,12 @@ input[type=range]::-webkit-slider-thumb:active {
 @media (max-width: 360px) {
     .city-name {
         font-size: clamp(1.2rem, 6vw, 2.5rem);
+        z-index: 50;
+        position: relative;
     }
 
     .temp-text {
-        font-size: clamp(1.5rem, 6vw, 3rem);
+        font-size: clamp(2rem, 8vw, 4rem);
     }
 
     .status-text {
@@ -461,10 +466,12 @@ input[type=range]::-webkit-slider-thumb:active {
     .city-name {
         margin-top: 0.5rem;
         font-size: clamp(1.2rem, 5vw, 2.5rem);
+        z-index: 50;
+        position: relative;
     }
 
     .temp-text {
-        font-size: clamp(1.5rem, 5vw, 3rem);
+        font-size: clamp(2rem, 7vw, 4rem);
     }
 
     .status-text {
@@ -504,4 +511,4 @@ input[type=range]::-webkit-slider-thumb:active {
         width: 60%;
         max-width: 300px;
     }
-  }
+}
