@@ -278,9 +278,12 @@ input[type=range]::-webkit-slider-thumb:active {
 
     .city-name {
         font-size: clamp(1.8rem, 8vw, 4rem);
-        margin-top: 1rem;
+        margin-top: 5rem;
         z-index: 50;
         position: relative;
+        opacity: 0.8 !important;
+        display: block !important;
+        visibility: visible !important;
     }
 
     .temp-text {
@@ -347,9 +350,12 @@ input[type=range]::-webkit-slider-thumb:active {
     .city-name {
         font-size: clamp(1.5rem, 7vw, 3rem);
         letter-spacing: 0.05em;
-        margin-top: 0.5rem;
+        margin-top: 5rem;
         z-index: 50;
         position: relative;
+        opacity: 0.8 !important;
+        display: block !important;
+        visibility: visible !important;
     }
 
     .temp-text {
@@ -423,8 +429,12 @@ input[type=range]::-webkit-slider-thumb:active {
 @media (max-width: 360px) {
     .city-name {
         font-size: clamp(1.2rem, 6vw, 2.5rem);
+        margin-top: 5rem;
         z-index: 50;
         position: relative;
+        opacity: 0.8 !important;
+        display: block !important;
+        visibility: visible !important;
     }
 
     .temp-text {
@@ -464,10 +474,13 @@ input[type=range]::-webkit-slider-thumb:active {
     }
 
     .city-name {
-        margin-top: 0.5rem;
+        margin-top: 4rem;
         font-size: clamp(1.2rem, 5vw, 2.5rem);
         z-index: 50;
         position: relative;
+        opacity: 0.8 !important;
+        display: block !important;
+        visibility: visible !important;
     }
 
     .temp-text {
