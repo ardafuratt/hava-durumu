@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu - Düzce</title>
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+   
+    
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="thunder-theme">
+
+    <div class="search-container">
+
+        <input type="text" id="cityInput" placeholder="Şehir ara...">
+   </div> 
+   
+
+    <header class="city-container">
+        <h1 class="city-name" id="cityName">DÜZCE</h1>
+    </header>
+
+    <main class="temp-container">
+        <span class="temp-text" id="temperature">-10°C</span>
+    </main>
+
+    <div class="suggestion-box">
+        <p id="box-text">bugün dışarı çıkma dosti </p>
+    </div>
+
+    <footer class="status-container">
+        <p class="status-text" id="weatherStatus">gök gürültülü</p>
+    </footer>
+
+    <div class="time-display" id="timeDisplay">12:00</div>
+
+    <div class="slider-container">
+        <input type="range" class="time-slider" id="timeSlider" min="0" max="23" step="1" value="12">
+    </div>
+        <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
+
