@@ -567,30 +567,33 @@ function startCloudyAnimation() {
 // Teleport API kullanarak arka plan görselini güncelleyen fonskyionum
 async function updateBackgroundImage(city) {
     try {
-        
         const response = await fetch(`https://api.teleport.org/api/cities/?search=${city}`);
+        if (!response.ok) throw new Error("Teleport'a ulaşılamıyor");
+
         const data = await response.json();
-        
         const searchResults = data._embedded['city:search-results'];
-        if (searchResults.length > 0) {
+        
+        if (searchResults && searchResults.length > 0) {
             const cityDetailsUrl = searchResults[0]._links['city:item'].href;
-            
-            
             const detailsRes = await fetch(cityDetailsUrl);
             const detailsData = await detailsRes.json();
             
             if (detailsData._links['city:urban_area']) {
                 const uaUrl = detailsData._links['city:urban_area'].href;
-                
-                
                 const imgRes = await fetch(`${uaUrl}images/`);
                 const imgData = await imgRes.json();
                 
                 const photoUrl = imgData.photos[0].image.web;
                 document.body.style.backgroundImage = `url('${photoUrl}')`;
+                return; // Başarılı, fonksiyon biter
             }
         }
+        throw new Error("Görsel bulunamadı");
     } catch (err) {
-        console.log("Görsel yüklenemedi, varsayılan arka plan kullanılıyor.");
+        console.warn("Teleport hatası, yedek arka plana geçiliyor.");
+        // GÖRSEL BULUNAMAZSA: Koyu, şık bir gradyan verelim ki yazılar okunsun
+        document.body.style.backgroundImage = "none";
+        document.body.style.backgroundColor = "#1a1a1a"; // Çok koyu gri/siyah
+        document.body.style.background = "linear-gradient(135deg, #1e1e2f 0%, #121212 100%)";
     }
 }
