@@ -643,10 +643,11 @@ async function updateBackgroundImage(city) {
 
     try {
      
-        const response = await fetch(
-            // Hem şehri hem de genel bir manzara havasını aratıyoruz
-`https://api.unsplash.com/search/photos?query=${encodeURIComponent(city + ' city skyline night')}&per_page=1&orientation=landscape&client_id=${UnsplashKey}`
-        );
+        const query = `${city} city skyline architecture high resolution 8k`;
+
+const response = await fetch(
+    `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape&client_id=${UnsplashKey}`
+);
         if (!response.ok) throw new Error("Unsplash API error");
 
         const data = await response.json();
