@@ -626,7 +626,7 @@ function startCloudyAnimation() {
     });
 }
 
-const UnsplashKey = import.meta.env.UNSPLASH_ACCESS_KEY;
+const UnsplashKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 const backgroundCache = new Map(); 
 
 async function updateBackgroundImage(city) {
@@ -644,9 +644,9 @@ async function updateBackgroundImage(city) {
     try {
      
         const response = await fetch(
-            `https://api.unsplash.com/search/photos?query=${encodeURIComponent(city + ' city skyline')}&per_page=1&orientation=landscape&client_id=${UnsplashKey}`
+            // Hem şehri hem de genel bir manzara havasını aratıyoruz
+`https://api.unsplash.com/search/photos?query=${encodeURIComponent(city + ' travel landscape')}&per_page=1&orientation=landscape&client_id=${UnsplashKey}`
         );
-
         if (!response.ok) throw new Error("Unsplash API error");
 
         const data = await response.json();
