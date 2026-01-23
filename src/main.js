@@ -645,7 +645,7 @@ async function updateBackgroundImage(city) {
      
         const response = await fetch(
             // Hem şehri hem de genel bir manzara havasını aratıyoruz
-`https://api.unsplash.com/search/photos?query=${encodeURIComponent(city + ' travel landscape')}&per_page=1&orientation=landscape&client_id=${UnsplashKey}`
+`https://api.unsplash.com/search/photos?query=${encodeURIComponent(city + ' city skyline night')}&per_page=1&orientation=landscape&client_id=${UnsplashKey}`
         );
         if (!response.ok) throw new Error("Unsplash API error");
 
