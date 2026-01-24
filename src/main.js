@@ -678,26 +678,35 @@ const response = await fetch(
 }
 
 
-       function applyFinalFallback() {
-    const worldImage = "/dünya.webp";
-    
+      function applyFinalFallback() {
+   
+    const worldImage = "/dunya.webp"; 
     
     const img = new Image();
     img.src = worldImage;
 
     img.onload = function() {
-        
         document.body.style.backgroundImage = `url('${worldImage}')`;
         document.body.style.backgroundSize = "cover";
         document.body.style.backgroundPosition = "center";
-    };
+        document.body.style.backgroundRepeat = "no-repeat";
+
+        
+        if (window.innerWidth < 768) {
+            document.body.style.backgroundAttachment = "scroll";
+        } else {
+            document.body.style.backgroundAttachment = "fixed";
+        }
+    }; 
 
     img.onerror = function() {
-        
-        console.warn("Dünya linki de çalışmadı, Gradient'e dönülüyor.");
+        console.error("Resim public klasöründe bulunamadı!");
         applyWeatherGradient(); 
     };
 }
+
+   
+
      function applyWeatherGradient() {
 
     const weatherThemes = {
