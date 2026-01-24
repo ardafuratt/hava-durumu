@@ -8,17 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     
-   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <link rel="stylesheet" href="/src/style.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
+
 </head>
 <body class="thunder-theme">
 
     <div class="search-container">
 
-        <input type="text" id="cityInput" placeholder="Şehir ara...">
-   </div> 
-   
+        <input type="text" id="cityInput" placeholder="Şehir ara..." autocomplete="off">
+        <div id="recentSearches" class="resent-searches-box" style="display: none;">
+            </div>
+        </div>
+    </div> 
 
     <header class="city-container">
         <h1 class="city-name" id="cityName">DÜZCE</h1>
@@ -41,6 +48,19 @@
     <div class="slider-container">
         <input type="range" class="time-slider" id="timeSlider" min="0" max="23" step="1" value="12">
     </div> 
+
+    <div id="mapsButton" class="maps-shortcut" title="Dünya Haritasını Aç">
+    <i class="fas fa-globe-americas"></i>
+</div>
+
+<div id="mapsContainer" class="full-screen-maps">
+    <div id="maps"></div>
+    <button id="closeMaps" class="close-maps-btn">
+        <i class="fas fa-times"></i> Kapat
+    </button>
+</div>
+
+
        <canvas id="canvas"></canvas>
 <script type="module" src="/src/main.js"></script>
 </body>

@@ -212,6 +212,109 @@ input[type=range]::-webkit-slider-thumb:active {
     z-index: 60;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+/* Harita Açma Butonu (Sağ Alt Köşe) */
+.maps-shortcut {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.maps-shortcut:hover {
+    transform: scale(1.1) rotate(15deg);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Tam Ekran Harita Konteynırı */
+.full-screen-maps {
+    display: none; /* Başta gizli */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    background: #000;
+    animation: fadeIn 0.4s ease-out;
+}
+
+#maps {
+    width: 100%;
+    height: 100%;
+}
+
+/* Harita Kapatma Butonu */
+.close-maps-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 1000000;
+    padding: 12px 25px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.close-maps-btn:hover {
+    background: rgba(255, 0, 0, 0.4);
+    border-color: #ff4d4d;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+}
+.recent-searches-box {
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    margin-top: 5px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.recent-item {
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recent-item:last-child {
+    border-bottom: none;
+}
+
+.recent-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 /* ==================== MOBİL RESPONSIVE ==================== */
 
 /* Tablet ve Küçük Ekranlar (768px ve altı) */

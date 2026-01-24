@@ -5,7 +5,16 @@ const suggestion = document.getElementById('box-text');
 const timeDisplay = document.getElementById('timeDisplay');
 const timeSlider = document.getElementById('timeSlider');
 
+const mapsButton = document.getElementById('mapsButton');
+const mapContainer = document.getElementById('mapsContainer');
+const closeMapButton = document.getElementById('closeMapsButton');
+
+const resentSearchesBox = document.getElementById('resentSearches');
+
+
 let animationId = null;
+let myMapInstance; 
+let currentMarker;
 
 
 const ApiKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -214,7 +223,9 @@ cityInput.addEventListener('keypress', function (event) {
         }
 
         fetchweatherByCity(city);
+        saveToRecent(city);
         cityInput.value = '';
+        resentSearchBox.style.display = 'none';
     }
 });
 
@@ -661,14 +672,34 @@ const response = await fetch(
             throw new Error("No photos found");
         }
     } catch (err) {
-        console.warn("Unsplash error, using weather-themed gradient:", err.message);
-        backgroundCache.set(city, 'fallback');
-        applyWeatherGradient();
+       console.warn("Unsplash bulunamadı, Dünya fotoğrafı deneniyor...");
+        applyFinalFallback(); 
     }
 }
 
 
-function applyWeatherGradient() {
+       function applyFinalFallback() {
+    const worldImage = "/dünya.webp";
+    
+    
+    const img = new Image();
+    img.src = worldImage;
+
+    img.onload = function() {
+        
+        document.body.style.backgroundImage = `url('${worldImage}')`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundPosition = "center";
+    };
+
+    img.onerror = function() {
+        
+        console.warn("Dünya linki de çalışmadı, Gradient'e dönülüyor.");
+        applyWeatherGradient(); 
+    };
+}
+     function applyWeatherGradient() {
+
     const weatherThemes = {
         'rainy-theme': 'linear-gradient(135deg, #343a40 0%, #495057 100%)',
         'snowy-theme': 'linear-gradient(135deg, #adb5bd 0%, #dee2e6 100%)',
@@ -685,3 +716,110 @@ function applyWeatherGradient() {
     const gradient = weatherThemes[currentTheme] || 'linear-gradient(135deg, #1e1e2f 0%, #121212 100%)';
     document.body.style.backgroundImage = gradient;
 }
+
+
+
+
+function initMaps() {
+    if (myMapInstance) return; 
+
+    myMapInstance = L.map('maps').setView([38.96, 35.24], 6); 
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(myMapInstance); 
+
+    myMapInstance.on('click', function(e) {
+        const { lat, lng } = e.latlng;
+        console.log("Seçilen Koordinatlar:", lat, lng); 
+
+        if (currentMarker) {
+            myMapInstance.removeLayer(currentMarker);
+        }
+
+        currentMarker = L.marker([lat, lng]).addTo(myMapInstance); 
+
+        fetchweather(lat, lng); 
+ 
+        setTimeout(() => { 
+
+        closeMapsPanel();
+        }, 300);
+    });
+}
+
+mapsButton.addEventListener('click', () => {
+    
+    mapsContainer.style.display = 'block';
+    
+    
+    initMaps();
+    
+    
+    setTimeout(() => {
+        myMapInstance.invalidateSize();
+    }, 200);
+}); 
+
+function closeMapsPanel() {
+    mapsContainer.style.display = 'none';
+}
+if (closeMapButton) { 
+closeMapButton.addEventListener('click', closeMapsPanel); 
+}
+    
+
+    const recentSearchesBox = document.getElementById('recentSearches');
+
+
+function saveToRecent(city) {
+    let searches = JSON.parse(localStorage.getItem('recentCities')) || [];
+    
+    
+    searches = searches.filter(item => item.toLowerCase() !== city.toLowerCase());
+    
+    
+    searches.unshift(city);
+    
+   
+    searches = searches.slice(0, 2);
+    
+    localStorage.setItem('recentCities', JSON.stringify(searches));
+}
+
+
+function displayRecentSearches() {
+
+    if (!recentSearchesBox) return;
+
+    const searches = JSON.parse(localStorage.getItem('recentCities')) || [];
+    
+    if (searches.length === 0) {
+        recentSearchesBox.style.display = 'none';
+        return;
+    }
+
+    recentSearchesBox.innerHTML = '';
+    searches.forEach(city => {
+        const div = document.createElement('div');
+        div.className = 'recent-item';
+        div.textContent = city;
+        div.onclick = () => {
+            fetchweatherByCity(city);
+            recentSearchesBox.style.display = 'none';
+        };
+        recentSearchesBox.appendChild(div);
+    });
+    
+    recentSearchesBox.style.display = 'block';
+}
+
+
+cityInput.addEventListener('focus', displayRecentSearches);
+
+
+document.addEventListener('click', (e) => {
+    if (!cityInput.contains(e.target) && !recentSearchesBox.contains(e.target)) {
+        recentSearchesBox.style.display = 'none';
+    }
+});
