@@ -757,7 +757,9 @@ function initMaps() {
     });
 }
 
-mapsButton.addEventListener('click', () => {
+mapsButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     
     mapsContainer.style.display = 'block';
     
@@ -770,11 +772,17 @@ mapsButton.addEventListener('click', () => {
     }, 200);
 }); 
 
-function closeMapsPanel() {
+function closeMapsPanel(e) {
+    if (e) e.stopPropagation(); 
     mapsContainer.style.display = 'none';
+    console.log("Harita kapatıldı");
 }
+
 if (closeMapButton) { 
-closeMapButton.addEventListener('click', closeMapsPanel); 
+   
+    ['click', 'touchend'].forEach(evt => 
+        closeMapButton.addEventListener(evt, closeMapsPanel, false)
+    );
 }
     
 
