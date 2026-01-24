@@ -6,23 +6,35 @@
 
 body {
     min-height: 100vh;
+   
+    min-height: 100dvh; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 3rem;
+    padding: 2rem;
     overflow-y: auto;
     overflow-x: hidden;
-    /* Ana font Montserrat olarak ayarlandı */
     font-family: 'Montserrat', sans-serif;
     color: white;
     position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    transition: background-image 1s ease-in-out; /* Fotoğraf yumuşak değişir */
+    
+
+    
+    transition: background-image 1s ease-in-out;
+    background-color: #000;
 }
+
+@media (min-width: 768px) {
+    body {
+        background-attachment: fixed;
+    }
+} 
+
+
 body::before {
     content: "";
     position: fixed;
