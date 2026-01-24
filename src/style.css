@@ -6,7 +6,6 @@
 
 body {
     min-height: 100vh;
-   
     min-height: 100dvh; 
     display: flex;
     flex-direction: column;
@@ -17,22 +16,25 @@ body {
     overflow-x: hidden;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    position: relative;
+    background-color: #000;
+}
+    
+
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+    background-image: inherit; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-
-    
-    transition: background-image 1s ease-in-out;
-    background-color: #000;
+    z-index: -2;
 }
-
-@media (min-width: 768px) {
-    body {
-        background-attachment: fixed;
-    }
-} 
 
 
 body::before {
@@ -42,23 +44,16 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* %30 karartma */
+    background: rgba(0, 0, 0, 0.4); 
     z-index: -1; 
 }
-#canvas, #weather-animation-canvas {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100vw; 
-    height: 100vh; 
-    z-index: 5; 
-    pointer-events: none; 
-    
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+
+
+@media (min-width: 768px) {
+    body::after {
+        background-attachment: fixed;
+    }
 }
-
-
 
 /* Arama Konteyneri */
 .search-container {

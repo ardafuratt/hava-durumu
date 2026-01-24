@@ -686,10 +686,10 @@ const response = await fetch(
     img.src = worldImage;
 
     img.onload = function() {
-        document.body.style.backgroundImage = `url('${worldImage}')`;
-        document.body.style.backgroundSize = "cover";
-        document.body.style.backgroundPosition = "center";
-        document.body.style.backgroundRepeat = "no-repeat";
+   
+    document.body.style.backgroundImage = `url('${worldImage}')`;
+    console.log("Resim başarıyla body'e işlendi.");
+};
 
         
         if (window.innerWidth < 768) {
@@ -703,7 +703,7 @@ const response = await fetch(
         console.error("Resim public klasöründe bulunamadı!");
         applyWeatherGradient(); 
     };
-}
+
 
    
 
