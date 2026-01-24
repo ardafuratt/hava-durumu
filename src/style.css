@@ -399,7 +399,15 @@ input[type=range]::-webkit-slider-thumb:active {
         max-width: 350px;
     }
 }
-
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll !important; /* fixed yerine scroll */
+    }
+    
+    body::after {
+        background-attachment: scroll !important;
+    }
+}
 /* Mobil Telefon (480px ve altı) */
 @media (max-width: 480px) {
     body {

@@ -9,7 +9,7 @@ const mapsButton = document.getElementById('mapsButton');
 const mapContainer = document.getElementById('mapsContainer');
 const closeMapButton = document.getElementById('closeMapsButton');
 
-const resentSearchesBox = document.getElementById('resentSearches');
+const recentSearchesBox = document.getElementById('recentSearches');
 
 
 let animationId = null;
@@ -225,7 +225,7 @@ cityInput.addEventListener('keypress', function (event) {
         fetchweatherByCity(city);
         saveToRecent(city);
         cityInput.value = '';
-        resentSearchBox.style.display = 'none';
+        recentSearchBox.style.display = 'none';
     }
 });
 
@@ -689,7 +689,7 @@ const response = await fetch(
    
     document.body.style.backgroundImage = `url('${worldImage}')`;
     console.log("Resim başarıyla body'e işlendi.");
-};
+
 
         
         if (window.innerWidth < 768) {
@@ -697,15 +697,15 @@ const response = await fetch(
         } else {
             document.body.style.backgroundAttachment = "fixed";
         }
-    }; 
+    };
 
     img.onerror = function() {
         console.error("Resim public klasöründe bulunamadı!");
         applyWeatherGradient(); 
     };
+  img.src = worldImage;
 
-
-   
+} 
 
      function applyWeatherGradient() {
 
@@ -763,13 +763,14 @@ mapsButton.addEventListener('click', (e) => {
     
     mapsContainer.style.display = 'block';
     
-    
-    initMaps();
+    if (!myMapInstance) {
+        initMaps();
+    }
     
     
     setTimeout(() => {
         myMapInstance.invalidateSize();
-    }, 200);
+    }, 300);
 }); 
 
 function closeMapsPanel(e) {
@@ -786,8 +787,7 @@ if (closeMapButton) {
 }
     
 
-    const recentSearchesBox = document.getElementById('recentSearches');
-
+    
 
 function saveToRecent(city) {
     let searches = JSON.parse(localStorage.getItem('recentCities')) || [];
